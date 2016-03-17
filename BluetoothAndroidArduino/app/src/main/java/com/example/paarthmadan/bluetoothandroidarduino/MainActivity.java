@@ -1,22 +1,21 @@
 package com.example.paarthmadan.bluetoothandroidarduino;
+
 import android.os.Bundle;
 import android.app.Activity;
-import android.view.Menu;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.EditText;
 import android.widget.Button;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Set;
 import java.util.UUID;
+
+import static android.content.pm.ActivityInfo.*;
 
 public class MainActivity extends Activity {
 
@@ -34,6 +33,8 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        setRequestedOrientation(SCREEN_ORIENTATION_PORTRAIT);
 
         Button openButton = (Button) findViewById(R.id.connect);
         Button closeButton = (Button) findViewById(R.id.disconnect);
@@ -64,9 +65,9 @@ public class MainActivity extends Activity {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
+                try {
                     sendString();
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
             }
