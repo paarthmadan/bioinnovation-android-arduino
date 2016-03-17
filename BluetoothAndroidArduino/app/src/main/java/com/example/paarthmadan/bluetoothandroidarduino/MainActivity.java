@@ -135,7 +135,6 @@ public class MainActivity extends Activity {
         i.putExtra(RecognizerIntent.EXTRA_PROMPT, "Say Something!");
 
         try {
-                System.out.println("success 1");
                 startActivityForResult(i, 100);
             }
         catch (ActivityNotFoundException a)
@@ -154,13 +153,12 @@ public class MainActivity extends Activity {
 
         super.onActivityResult(requestcode, resultcode, i);
 
-        System.out.println("success 3 \t" + resultcode);
-
         switch(requestcode){
             case 100:
 
                 if(resultcode == RESULT_OK && i != null){
-                    System.out.println("success");
+
+                    
                     ArrayList<String> results = i.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 
                     try{
