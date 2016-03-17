@@ -1,4 +1,5 @@
 int counter = 0; 
+String incomingByte;
 
 void setup() {
   Serial.begin(9600);
@@ -6,7 +7,13 @@ void setup() {
 }
 
 void loop() {
- counter++;
- Serial.println(counter);
- delay(1000); 
+
+if (Serial.available() > 0) {
+                // read the incoming byte:
+                incomingByte = Serial.readString();
+
+                // say what you got:
+                Serial.print("I received: ");
+                Serial.println(incomingByte);
+        }
 }

@@ -9,23 +9,13 @@
 
 
     <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/close"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp"
-        android:text="Compartment Indicator"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
         android:id="@+id/label"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="80dp"
         android:maxLines="10"
-        android:text="Temparature Values"
+        android:text="Values"
         android:textSize="20sp"
         android:width="350dp" />
 
@@ -48,5 +38,13 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="16dp"
         android:text="Close Bluetooth" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send 1"
+        android:id="@+id/send"
+        android:layout_alignBottom="@+id/label"
+        android:layout_marginLeft="50dp"/>
 
 </RelativeLayout>

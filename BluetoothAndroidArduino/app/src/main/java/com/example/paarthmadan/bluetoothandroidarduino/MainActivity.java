@@ -42,6 +42,7 @@ public class MainActivity extends Activity {
 
         Button openButton = (Button) findViewById(R.id.open);
         Button closeButton = (Button) findViewById(R.id.close);
+        Button sendButton = (Button) findViewById(R.id.send);
         myLabel = (TextView) findViewById(R.id.label);
 
         // Open Button
@@ -61,6 +62,17 @@ public class MainActivity extends Activity {
                 try {
                     closeBT();
                 } catch (IOException ex) {
+                }
+            }
+        });
+
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+                    onButton();
+                }catch (Exception e){
+                    System.out.println(e.getMessage());
                 }
             }
         });
@@ -108,7 +120,8 @@ public class MainActivity extends Activity {
         mmOutputStream = mmSocket.getOutputStream();
         mmInputStream = mmSocket.getInputStream();
         myLabel.setText("Bluetooth Opened");
-        beginListenForData();
+
+//        beginListenForData();
 
     }
 
@@ -166,7 +179,8 @@ public class MainActivity extends Activity {
     }
 
     void onButton() throws IOException {
-        mmOutputStream.write("1".getBytes());
+        String send = "hello";
+        mmOutputStream.write(send.getBytes());
     }
 
     void offButton() throws IOException {
