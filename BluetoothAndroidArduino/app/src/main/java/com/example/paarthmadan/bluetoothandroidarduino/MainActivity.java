@@ -9,11 +9,18 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Set;
 import java.util.UUID;
+import android.content.ActivityNotFoundException;
+import android.speech.RecognizerIntent;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.Locale;
 
 import static android.content.pm.ActivityInfo.*;
 
@@ -122,8 +129,53 @@ public class MainActivity extends Activity {
 
 
     void sendString() throws IOException {
-        String send = "hello";
-        mmOutputStream.write(send.getBytes());
+        Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        i.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        i.putExtra(RecognizerIntent.EXTRA_PROMPT, "Say Something!");
+
+        try {
+                System.out.println("success 1");
+                startActivityForResult(i, 100);
+            }
+        catch (ActivityNotFoundException a)
+            {
+                Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_LONG).show();
+            }
+
+
+
+
+
+    }
+
+    public void onActivityResult(int requestcode, int resultcode, Intent i){
+
+
+        super.onActivityResult(requestcode, resultcode, i);
+
+        System.out.println("success 3 \t" + resultcode);
+
+        switch(requestcode){
+            case 100:
+
+                if(resultcode == RESULT_OK && i != null){
+                    System.out.println("success");
+                    ArrayList<String> results = i.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+
+                    try{
+                        mmOutputStream.write(results.get(0).getBytes());
+                    }
+                    catch (Exception e){
+                        Toast.makeText(MainActivity.this, "Could not send message!", Toast.LENGTH_SHORT).show();
+                    }
+
+
+                }
+
+                break;
+        }
+
     }
 
     void closeBT() throws IOException {
