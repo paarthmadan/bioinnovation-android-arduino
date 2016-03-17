@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BluetoothAndroidArduino</string>
+    <string name="app_name">Bio Innovation - Paarth Madan</string>
     <string name="connectLabel">Connect</string>
     <string name="disLabel">Disconnect</string>
     <string name="sendLabel">Send String</string>
