@@ -14,7 +14,18 @@ if (Serial.available() > 0) {
                 incomingByte = Serial.readString();
 
                 // say what you got:
-                Serial.print("I received: ");
+                
                 Serial.println(incomingByte);
+
+               
+               
+                char letters[incomingByte.length()+1]; 
+                incomingByte.toCharArray(letters, incomingByte.length() + 1);
+
+                for(int i = 0; i < sizeof(letters); i++){
+                  Serial.println(letters[i]);
+                }
+                
         }
+
 }
