@@ -46,10 +46,23 @@ public class MainActivity extends AppCompatActivity {
         Button disconnectButton = (Button) findViewById(R.id.disconnect);
         Button sendButton = (Button) findViewById(R.id.send);
 
+        //checking to see if bluetooth is enabled, and turning on if it is not
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+
 
         // Connect Button
         connectButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+
+                if (!mBluetoothAdapter.isEnabled()) {
+                    Intent enableBluetooth = new Intent(
+                            BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                    startActivityForResult(enableBluetooth, 0);
+                }
+
+
                 try {
                     findBT();
                     createConnection();
@@ -82,16 +95,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void findBT() {
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
 
         if (mBluetoothAdapter == null) {
             Toast.makeText(MainActivity.this, "No Bluetooth Adapter Available!", Toast.LENGTH_SHORT).show();
-        }
-
-        if (!mBluetoothAdapter.isEnabled()) {
-            Intent enableBluetooth = new Intent(
-                    BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBluetooth, 0);
         }
 
         Set<BluetoothDevice> pairedDevices = mBluetoothAdapter
