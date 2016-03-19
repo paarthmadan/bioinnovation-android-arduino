@@ -1,7 +1,6 @@
 package com.example.paarthmadan.bluetoothandroidarduino;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -43,24 +42,24 @@ public class MainActivity extends AppCompatActivity {
 
         setRequestedOrientation(SCREEN_ORIENTATION_PORTRAIT);
 
-        Button openButton = (Button) findViewById(R.id.connect);
-        Button closeButton = (Button) findViewById(R.id.disconnect);
+        Button connectButton = (Button) findViewById(R.id.connect);
+        Button disconnectButton = (Button) findViewById(R.id.disconnect);
         Button sendButton = (Button) findViewById(R.id.send);
 
 
-        // Open Button
-        openButton.setOnClickListener(new View.OnClickListener() {
+        // Connect Button
+        connectButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
                     findBT();
-                    openBT();
+                    createConnection();
                 } catch (IOException ex) {
                 }
             }
         });
 
-        // Close button
-        closeButton.setOnClickListener(new View.OnClickListener() {
+        // Disconnect button
+        disconnectButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
                     closeBT();
@@ -69,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Send Button
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         if (mBluetoothAdapter == null) {
-
+            Toast.makeText(MainActivity.this, "No Bluetooth Adapter Available!", Toast.LENGTH_SHORT).show();
         }
 
         if (!mBluetoothAdapter.isEnabled()) {
@@ -99,9 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (pairedDevices.size() > 0) {
             for (BluetoothDevice device : pairedDevices) {
-                if (device.getName().equals(btName)) // this name have to be
-                // replaced with your
-                // bluetooth device name
+                if (device.getName().equals(btName))
                 {
                     mmDevice = device;
                     Log.v("ArduinoBT",
@@ -115,14 +113,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    void openBT() throws IOException {
+    void createConnection() throws IOException {
 
+        Toast.makeText(MainActivity.this, "Connecting...", Toast.LENGTH_SHORT).show();
 
         mmSocket = mmDevice.createRfcommSocketToServiceRecord(uuid);
         mmSocket.connect();
         mmOutputStream = mmSocket.getOutputStream();
         mmInputStream = mmSocket.getInputStream();
 
+        Toast.makeText(MainActivity.this, "Connected!", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -157,7 +157,12 @@ public class MainActivity extends AppCompatActivity {
                     ArrayList<String> results = i.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 
                     try{
-                        mmOutputStream.write(results.get(0).getBytes());
+
+                        String input = results.get(0);
+
+                        input = input.toUpperCase();
+
+                        mmOutputStream.write(input.getBytes());
                     }
                     catch (Exception e){
                         Toast.makeText(MainActivity.this, "Could not send message!", Toast.LENGTH_SHORT).show();
@@ -176,6 +181,8 @@ public class MainActivity extends AppCompatActivity {
         mmOutputStream.close();
         mmInputStream.close();
         mmSocket.close();
+
+        Toast.makeText(MainActivity.this, "Disconnected!", Toast.LENGTH_SHORT).show();
 
     }
 
