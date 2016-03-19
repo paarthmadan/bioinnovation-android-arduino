@@ -3,6 +3,7 @@ String incomingByte;
 
 void setup() {
   Serial.begin(9600);
+  Serial.println("starting...");
 
 }
 
