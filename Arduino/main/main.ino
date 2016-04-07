@@ -1,7 +1,20 @@
-int counter = 0; 
+#include <Servo.h> 
+
+Servo index;
+Servo thumb;
+
 String incomingString;
 
+int pos = 0; 
+
 void setup() {
+
+  index.attach(9);
+  thumb.attach(10);
+  
+  index.write(60);
+  thumb.write(60);
+  
   Serial.begin(9600);
   Serial.println("starting...");
 
@@ -11,7 +24,6 @@ void loop() {
 
 if (Serial.available() > 0) {
 
-       
                 incomingString = Serial.readString();
 
                 Serial.println(incomingString);
@@ -141,6 +153,25 @@ if (Serial.available() > 0) {
 
 }
 
+void straightLineFromUp(){
+  index.write(60);
+  thumb.write(0);
+  delay(1000);
+  index.write(140);
+  thumb.write(140);
+}
+
+
+void straightLineFromDown(){
+
+  index.write(140);
+  thumb.write(140);
+  delay(1000);
+  index.write(60);
+  thumb.write(0);
+  
+}
+
 void A(){
   Serial.println("A");
 }
@@ -167,6 +198,9 @@ void H(){
   Serial.println("H");
 }
 void I(){
+  straightLineFromUp();
+  straightLineFromDown();
+  delay(750);
   Serial.println("I");
 }
 void J(){
@@ -176,6 +210,10 @@ void K(){
   Serial.println("K");
 }
 void L(){
+  straightLineFromUp();
+  delay(750);
+  straightLineFromDown();
+  delay(750);
   Serial.println("L");
 }
 void M(){
@@ -185,6 +223,10 @@ void N(){
   Serial.println("N");
 }
 void O(){
+  straightLineFromUp();
+  delay(750);
+  straightLineFromDown();
+  delay(750);
   Serial.println("O");
 }
 void P(){
@@ -203,6 +245,10 @@ void T(){
   Serial.println("T");
 }
 void U(){
+  straightLineFromUp();
+  delay(750);
+  straightLineFromDown();
+  delay(750);
   Serial.println("U");
 }
 void V(){
