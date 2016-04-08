@@ -153,6 +153,39 @@ if (Serial.available() > 0) {
 
 }
 
+void halfDownFromUp(){
+  index.write(60);
+  thumb.write(0);
+  delay(1000);
+  index.write(90);
+  thumb.write(90);
+}
+
+void halfUpFromDown(){
+    index.write(140);
+  thumb.write(140);
+  delay(1000);
+  index.write(60);
+  thumb.write(60);
+}
+
+void middleToUp(){
+  index.write(60);
+  thumb.write(60);
+  delay(1000);
+  index.write(45);
+  thumb.write(0);
+}
+
+void middleToDown(){
+  index.write(90);
+  thumb.write(90);
+  delay(1000);
+  index.write(140);
+  thumb.write(140);
+}
+
+
 void straightLineFromUp(){
   index.write(60);
   thumb.write(0);
@@ -173,9 +206,17 @@ void straightLineFromDown(){
 }
 
 void A(){
+  straightLineFromUp();
+  halfUpFromDown();
+  delay(750);
+  middleToUp();
+  delay(1000);
+  straightLineFromUp();
+  straightLineFromDown();
   Serial.println("A");
 }
 void B(){
+
   Serial.println("B");
 }
 void C(){
