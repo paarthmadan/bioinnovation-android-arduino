@@ -236,6 +236,11 @@ void G(){
   Serial.println("G");
 }
 void H(){
+  straightLineFromUp();
+  halfUpFromDown();
+  delay(750);
+  middleToUp();
+  straightLineFromUp();
   Serial.println("H");
 }
 void I(){
