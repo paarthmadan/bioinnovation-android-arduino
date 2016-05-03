@@ -3,14 +3,21 @@
 Servo index;
 Servo thumb;
 
+int leftLed = 12;
+int rightLed = 13;
+
 String incomingString;
 
 int pos = 0; 
 
 void setup() {
 
+  pinMode(OUTPUT, leftLed);
+  pinMode(OUTPUT, rightLed);
+
   index.attach(9);
-  thumb.attach(10);
+  
+  thumb.attach(11);
   
   index.write(60);
   thumb.write(60);
@@ -153,12 +160,26 @@ if (Serial.available() > 0) {
 
 }
 
+void leftLight(){
+  digitalWrite(leftLed, HIGH);
+  delay(750);
+  digitalWrite(leftLed, LOW);
+}
+
+
+void rightLight(){
+ digitalWrite(rightLed, HIGH);
+  delay(750);
+  digitalWrite(rightLed, LOW);
+}
+
 void halfDownFromUp(){
   index.write(60);
   thumb.write(0);
   delay(1000);
   index.write(90);
   thumb.write(90);
+  delay(700);
 }
 
 void halfUpFromDown(){
@@ -167,6 +188,7 @@ void halfUpFromDown(){
   delay(1000);
   index.write(60);
   thumb.write(60);
+  delay(700);
 }
 
 void middleToUp(){
@@ -175,6 +197,7 @@ void middleToUp(){
   delay(1000);
   index.write(45);
   thumb.write(0);
+  delay(700);
 }
 
 void middleToDown(){
@@ -183,6 +206,7 @@ void middleToDown(){
   delay(1000);
   index.write(140);
   thumb.write(140);
+  delay(700);
 }
 
 
@@ -192,6 +216,7 @@ void straightLineFromUp(){
   delay(1000);
   index.write(140);
   thumb.write(140);
+  delay(700);
 }
 
 
@@ -202,15 +227,17 @@ void straightLineFromDown(){
   delay(1000);
   index.write(60);
   thumb.write(0);
+  delay(700);
   
 }
 
 void A(){
   straightLineFromUp();
   halfUpFromDown();
-  delay(750);
+  rightLight();
   middleToUp();
-  delay(1000);
+  leftLight();
+  rightLight();
   straightLineFromUp();
   straightLineFromDown();
   Serial.println("A");
@@ -238,7 +265,7 @@ void G(){
 void H(){
   straightLineFromUp();
   halfUpFromDown();
-  delay(750);
+  rightLight();
   middleToUp();
   straightLineFromUp();
   Serial.println("H");
@@ -246,7 +273,6 @@ void H(){
 void I(){
   straightLineFromUp();
   straightLineFromDown();
-  delay(750);
   Serial.println("I");
 }
 void J(){
@@ -257,7 +283,7 @@ void K(){
 }
 void L(){
   straightLineFromUp();
-  delay(750);
+  rightLight();
   straightLineFromDown();
   delay(750);
   Serial.println("L");
@@ -270,9 +296,10 @@ void N(){
 }
 void O(){
   straightLineFromUp();
-  delay(750);
+  rightLight();
   straightLineFromDown();
-  delay(750);
+  leftLight();
+  rightLight();
   Serial.println("O");
 }
 void P(){
@@ -292,7 +319,7 @@ void T(){
 }
 void U(){
   straightLineFromUp();
-  delay(750);
+  rightLight();
   straightLineFromDown();
   delay(750);
   Serial.println("U");
