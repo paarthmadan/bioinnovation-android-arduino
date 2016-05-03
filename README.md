@@ -6,7 +6,13 @@ Pollexo is a Bio Innovation purposed to enhance the lives of autistic individual
   - Technical
   - Satisfies Need
 
-![Index Alpha](https://raw.githubusercontent.com/paarthmadan/bluetooth-android/122f228ef77059e37ed728917c6c78215a153bb8/Images/IndexAlpha.png)
+![Index Alpha](https://raw.githubusercontent.com/paarthmadan/bluetooth-android/122f228ef77059e37ed728917c6c78215a153bb8/Images/IndexAlpha.png =700x525)
+
+![Main Alpha](https://raw.githubusercontent.com/paarthmadan/bluetooth-android/122f228ef77059e37ed728917c6c78215a153bb8/Images/MainAlpha.png =700x525)
+
+![Real](https://raw.githubusercontent.com/paarthmadan/bluetooth-android/122f228ef77059e37ed728917c6c78215a153bb8/Images/Real.png =700x525)
+
+
 
 ### Purpose
 ##### Some autistic individuals face issues with fine-motor skills:
