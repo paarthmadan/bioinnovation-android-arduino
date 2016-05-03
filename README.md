@@ -12,6 +12,7 @@ Pollexo is a Bio Innovation purposed to enhance the lives of autistic individual
 - Gripping Objects
 - Holding Utensils (Pencils, Cutlery)
 - Correlating brain signals to physical movements
+
 ##### Pollexo is aimed to simulate this fine-motor skill with a mechanical exo hand, that the individual wears. It is controlled by the Arduino, to which signals are sent through an Android App sent over bluetooth.
 
 ### Components Used
